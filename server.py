@@ -13,17 +13,16 @@ def read_root():
 if __name__ == "__main__":
     import uvicorn
 
-    ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-    ssl_context.load_cert_chain(certfile="server.crt", keyfile="server.key")
-    ssl_context.load_verify_locations(cafile="ca.crt")
-    ssl_context.verify_mode = ssl.CERT_REQUIRED
-
     print("🚀 Starting secure mTLS server on https://127.0.0.1:8000")
     
+    # Using explicit file paths so Uvicorn can handle reload=True cleanly
     uvicorn.run(
         "server:app", 
         host="127.0.0.1", 
         port=8000, 
-        ssl_context=ssl_context,
+        ssl_keyfile="server.key",
+        ssl_certfile="server.crt",
+        ssl_ca_certs="ca.crt",
+        ssl_cert_reqs=int(ssl.CERT_REQUIRED),
         reload=True
     )
