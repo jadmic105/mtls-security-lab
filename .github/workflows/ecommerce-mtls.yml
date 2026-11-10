@@ -1,0 +1,32 @@
+name: E-commerce mTLS lab
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  ecommerce-mtls:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: |
+          pip install -r ecommerce-lab/requirements.txt
+          command -v nginx || [ -x /usr/sbin/nginx ] || (sudo apt-get update && sudo apt-get install -y nginx)
+
+      - name: Run security tests
+        run: ./ecommerce-lab/scripts/run_tests.sh
+
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ecommerce-lab-logs
+          path: ecommerce-lab/run/*.log
