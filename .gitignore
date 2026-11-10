@@ -1,1 +1,5 @@
 *.key
+*.csr
+*.srl
+.venv/
+__pycache__/
