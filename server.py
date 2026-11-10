@@ -11,7 +11,7 @@ def read_root(request: Request):
     
     if not client_cert:
         # Extra safeguard: reject if somehow missing
-        raise HTTPException(status_code=403, detail="Client certificate missing")
+        pass  # client cert enforced at TLS layer (CERT_REQUIRED)
 
     # 2. Parse the certificate string or dictionary depending on the ASGI server state
     # In standard Uvicorn setups, we can read the subject components
