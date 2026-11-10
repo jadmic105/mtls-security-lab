@@ -1,4 +1,4 @@
-name: mTLS tests
+name: Production mTLS
 
 on:
   push:
