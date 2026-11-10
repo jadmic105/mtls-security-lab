@@ -1,5 +1,7 @@
 # mTLS Security Lab
 
+![mTLS tests](https://github.com/jadmic105/mtls-security-lab/actions/workflows/mtls-tests.yml/badge.svg)
+
 A small lab that demonstrates **mutual TLS (mTLS)**: the server proves its identity to the client, and the client must prove its identity to the server with a certificate signed by a trusted CA. A simulated attacker presenting an untrusted certificate is rejected during the TLS handshake.
 
 Built and tested on Ubuntu under WSL with OpenSSL 3 and Python 3.
