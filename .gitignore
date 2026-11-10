@@ -3,3 +3,4 @@
 *.srl
 .venv/
 __pycache__/
+server.log
